@@ -396,3 +396,71 @@ section {
 #logoutBtn {
   margin-left: 10px;
 }
+/* Centering container */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Glass card */
+.auth-box {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 15px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0,255,238,0.2);
+}
+
+/* Heading */
+.auth-box h2 {
+  margin-bottom: 20px;
+}
+
+.auth-box span {
+  color: #00ffee;
+}
+
+/* Inputs */
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: white;
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 25px;
+  background: #00ffee;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  box-shadow: 0 0 20px #00ffee;
+}
+
+/* Secondary button */
+.secondary {
+  background: transparent;
+  border: 2px solid #00ffee;
+  color: #00ffee;
+}
+
+/* Message */
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+}

@@ -9,17 +9,17 @@
 
 <body>
 <div class="auth-container">
-  <div class="auth-box">
-    <h2>Welcome Back</h2>
-
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-
-    <button id="loginBtn" class="btn">Login</button>
-    <button id="signupBtn" class="btn" style="margin-top:10px;">Sign Up</button>
-
-    <p id="statusMessage"></p>
-  </div>
+    <div class="auth-box">
+        <h2>Welcome <span>Back</span></h2>
+        
+        <input type="email" id="email" placeholder="Enter your email">
+        <input type="password" id="password" placeholder="Enter your password">
+        
+        <button id="loginBtn" class="btn">Login</button>
+        <button id="signupBtn" class="btn" style="background: transparent; border: 1px solid var(--main-color); margin-top: 10px;">Sign Up</button>
+        
+        <p id="statusMessage" class="message"></p>
+    </div>
 </div>
 
 <script type="module" src="auth.js"></script>

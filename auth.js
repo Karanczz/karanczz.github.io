@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDMOHAmLOK3vuNTh-Qul_jB6Wb0QDFKFww",
@@ -21,13 +21,31 @@ const msg = document.getElementById("statusMessage");
 // Signup
 signupBtn.onclick = () => {
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => msg.innerText = "Account created!")
-    .catch(e => msg.innerText = e.message);
+    .then(() => {
+      msg.innerText = "✅ Account created successfully!";
+      msg.style.color = "#00ffee";
+    })
+    .catch((e) => {
+      msg.innerText = "❌ " + e.message;
+      msg.style.color = "red";
+    });
 };
 
 // Login
 loginBtn.onclick = () => {
+  msg.innerText = "⏳ Logging in...";
+
   signInWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => window.location.href = "portfolio.html")
-    .catch(e => msg.innerText = e.message);
+    .then(() => {
+      window.location.href = "portfolio.html";
+    })
+    .catch((e) => {
+      msg.innerText = "❌ " + e.message;
+      msg.style.color = "red";
+    });
 };
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = "portfolio.html";
+  }
+});

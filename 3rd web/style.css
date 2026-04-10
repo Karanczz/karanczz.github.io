@@ -1,0 +1,389 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for Dark Theme */
+:root {
+    --bg-color: #080808;
+    --second-bg-color: #131313;
+    --text-color: #ffffff;
+    --main-color: #00ffee;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(45deg, #080808, #111111, #002220, #080808);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-color);
+}
+
+/* Add this right below the body tag to make the animation work */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+.header.sticky {
+    background: var(--bg-color);
+    box-shadow: 0 0 10px rgba(0, 255, 238, 0.2);
+}
+
+.logo {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: default;
+}
+
+.navbar a {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-left: 2.5rem;
+    transition: 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+
+/* Section Layout */
+section {
+    min-height: 100vh;
+    padding: 6rem 9% 2rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Home Section */
+.home {
+    justify-content: center;
+    text-align: center;
+}
+
+.home-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.home-content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 1rem 0;
+}
+
+.text-animation {
+    color: var(--main-color);
+}
+
+.home-content p {
+    font-size: 1rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2.2rem;
+    background: var(--main-color);
+    border-radius: 2rem;
+    box-shadow: 0 0 10px var(--main-color);
+    font-size: 1rem;
+    color: var(--bg-color);
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    box-shadow: none;
+    background: transparent;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+}
+
+/* About Section */
+/* Update this in style.css */
+/* Update these blocks in your CSS */
+.about {
+    background: transparent;
+    justify-content: center;
+    text-align: center;
+}
+
+.education {
+    background: transparent;
+}
+
+.projects {
+    background: transparent;
+}
+
+.about-content h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.about-content h2 span {
+    color: var(--main-color);
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+/* Shared Section Layout */
+.section-content {
+    width: 100%;
+    text-align: center;
+}
+
+.section-content h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+
+.section-content h2 span {
+    color: var(--main-color);
+}
+
+/* Alternate Background Colors */
+.education {
+    background: var(--bg-color);
+}
+
+.projects {
+    background: var(--second-bg-color);
+}
+
+/* Card Container & Cards */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Replace your current .card and .education .card blocks with this */
+.card {
+    background: rgba(19, 19, 19, 0.5); /* Semi-transparent dark grey */
+    backdrop-filter: blur(10px); /* Frosted glass blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    transition: 0.3s ease;
+}
+
+.education .card {
+    background: #1a1a1a; /* slightly lighter for contrast */
+}
+
+.card:hover {
+    border-color: var(--main-color);
+    transform: translateY(-10px);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    color: #ccc;
+}
+/* This aligns the links in a row and adds space between them */
+.social-links {
+    display: flex;
+    gap: 2rem; /* <--- This creates the space! Increase it if you want them further apart */
+    margin-top: 1rem; /* Adds a little space between the button and the links */
+}
+
+/* This fixes the purple color and styles the text */
+.social-links a {
+    color: var(--text-color); /* Makes them white instead of purple */
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+}
+
+/* Adds a cool hover effect */
+.social-links a:hover {
+    color: var(--main-color);
+    border-bottom-color: var(--main-color);
+}
+/* Center the main contact text */
+.footer-content {
+    display: flex;
+    flex-direction: column; /* Stacks the title, text, and icons on top of each other */
+    align-items: center;    /* Pushes everything to the direct center of the screen */
+    text-align: center;     /* Centers the text paragraphs */
+    width: 100%;
+    padding: 2rem;
+}
+
+/* Arrange the icons horizontally */
+.socials {
+    display: flex;
+    flex-direction: row;      /* Forces the icons to sit side-by-side in a horizontal line */
+    justify-content: center;  /* Centers the row of icons */
+    list-style: none;         /* Removes default bullet points */
+    padding: 0;
+    margin-top: 2rem;
+    gap: 2rem;                /* Adds space between each icon */
+}
+
+/* Fix the icon colors and add the circles */
+.socials a {
+    text-decoration: none;
+    color: var(--text-color); /* Changes them from default purple to white */
+    border: 2px solid var(--text-color);
+    border-radius: 50%;       /* Makes the border a perfect circle */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+/* Add the hover effect back */
+.socials a:hover {
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    transform: translateY(-5px);
+}
+/* Project Images */
+.project-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Ensures the image doesn't stretch weirdly */
+    border-radius: 0.5rem; /* Slightly rounded corners */
+    margin-bottom: 1rem;
+}
+
+/* Tech Stack Badges */
+.tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-stack span {
+    background: var(--main-color);
+    color: var(--bg-color);
+    padding: 0.2rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+/* =========================================
+   Mobile Responsiveness (Media Queries)
+   ========================================= */
+
+/* For Tablets and Smaller Screens (under 768px) */
+@media (max-width: 768px) {
+    /* 1. Stack the header and navigation menu */
+    .header {
+        flex-direction: column;
+        padding: 1rem 5%;
+        background: var(--bg-color); /* Adds solid background so text is readable */
+    }
+
+    .navbar {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .navbar a {
+        margin-left: 0;
+        font-size: 1rem;
+    }
+
+    /* 2. Reduce empty space on the sides */
+    section {
+        padding: 6rem 5% 2rem;
+    }
+
+    /* 3. Shrink massive text so it fits on screens */
+    .home-content h1 {
+        font-size: 3rem;
+    }
+
+    .section-content h2,
+    .about-content h2,
+    .footer-content h2 {
+        font-size: 2.2rem;
+    }
+
+    /* 4. Allow cards to fill the mobile screen */
+    .card {
+        width: 100%; 
+        max-width: 380px; 
+    }
+}
+
+/* For Very Small Phones (under 480px) */
+@media (max-width: 480px) {
+    /* Make headers even smaller */
+    .home-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .home-content h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Keep footer icons from squishing together */
+    .socials {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .socials a {
+        width: 40px;
+        height: 40px;
+    }
+}

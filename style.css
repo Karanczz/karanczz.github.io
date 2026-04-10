@@ -387,3 +387,12 @@ section {
         height: 40px;
     }
 }
+#userEmail {
+  margin-left: 20px;
+  color: #00ffee;
+  font-weight: 600;
+}
+
+#logoutBtn {
+  margin-left: 10px;
+}

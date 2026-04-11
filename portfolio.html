@@ -6,11 +6,18 @@
     <title>Personal Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
     <header class="header">
-  <a href="#" class="logo">Karan</a>
+  <a href="#" class="logo">Karan's Portfolio</a>
+  <!-- Hamburger icon -->
+  <div class="menu-icon" id="menu-icon">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
 
   <nav class="navbar">
     <a href="#home">Home</a>
@@ -22,16 +29,39 @@
 </header>
 
     <section class="home" id="home">
-        <div class="home-content">
-            <h3>Hello, It's Me</h3>
-            <h1>Karan</h1>
-            <h3>And I'm a <span class="text-animation">Frontend Developer</span></h3>
-            <p>I design and code beautifully simple things, and I love what I do. Welcome to my personal slice of the internet.</p>
-            <a href="#about" class="btn">Learn More</a>
-        </div>
-    </section>
 
-    <section class="education" id="education">
+  <div class="home-container">
+
+    <!-- LEFT SIDE (IMAGE) -->
+    <div class="home-img">
+      <img src="project4.webp" alt="profile">
+    </div>
+
+    <!-- RIGHT SIDE (TEXT) -->
+    <div class="home-content">
+      <h3>Hello, It's Me</h3>
+      <h1>Karan</h1>
+
+      <h3 class="role">
+        I'm a <span>Frontend Developer</span>
+      </h3>
+
+      <p>
+        I build modern, responsive and visually stunning web experiences 
+        with clean code and creative design.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="#contact" class="btn secondary">Hire Me</a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+    <section class="education" id="education" data-aos="fade-up">
         <div class="section-content">
             <h2>My <span>Education</span></h2>
             <div class="card-container">
@@ -47,7 +77,7 @@
         </div>
     </section>
 
-    <section class="projects" id="projects">
+    <section class="projects" id="projects" data-aos="fade-up">
         <div class="section-content">
             <h2>Latest <span>Projects</span></h2>
             <div class="card-container">
@@ -89,7 +119,7 @@
         </div>
     </section>
 
-    <section class="about" id="about">
+    <section class="about" id="about" data-aos="fade-up">
         <div class="about-content">
             <h2>About <span>Me</span></h2>
             <p>I am a passionate developer with a knack for building modern, responsive web applications. I enjoy turning complex problems into simple, beautiful, and intuitive interface designs.</p>
@@ -114,5 +144,59 @@
 
     <script src="script.js"></script>
     <script type="module" src="guard.js"></script>
+
+   <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector(".header");
+    const home = document.querySelector("#home");
+
+    window.addEventListener("scroll", () => {
+      const homeBottom = home.getBoundingClientRect().bottom;
+
+      if (homeBottom <= 0) {
+        header.style.display = "none"; // fully hide
+      } else {
+        header.style.display = "flex"; // show again
+      }
+    });
+  });
+</script>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+</script>
+
+<section class="chat-app">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="chat-users" id="userList"></div>
+
+  <!-- RIGHT CHAT AREA -->
+  <div class="chat-window">
+
+  <!-- HEADER -->
+  <div class="chat-header">
+    <span id="chatHeader">Select a user</span>
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="chatBox" class="chat-box"></div>
+
+  <!-- INPUT -->
+  <div class="chat-input">
+    <input type="text" id="messageInput" placeholder="Message..." />
+    <button id="sendBtn">➤</button>
+  </div>
+
+</div>
+
+</section>
+
+<script type="module" src="chat.js"></script>
+
 </body>
 </html>

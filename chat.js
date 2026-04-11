@@ -14,6 +14,8 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 let unsubscribeMessages = null;
+const chatApp = document.querySelector(".chat-app");
+const backToListBtn = document.getElementById("backToListBtn");
 
 // Firebase config
 const firebaseConfig = {
@@ -72,12 +74,14 @@ async function loadUsers() {
 
     div.onclick = () => {
       selectedUser = email;
-       // highlight active
-  document.querySelectorAll(".user").forEach(u => u.classList.remove("active"));
-  div.classList.add("active");
+      document.querySelectorAll(".user").forEach(u => u.classList.remove("active"));
+      div.classList.add("active");
       chatHeader.innerText = email;
       loadMessages();
       listenTyping();
+      
+      // NEW LINE: Triggers the mobile full-screen chat
+      chatApp.classList.add("show-chat"); 
     };
 
     userList.appendChild(div);
@@ -221,3 +225,11 @@ window.addEventListener("beforeunload", async () => {
     });
   }
 });
+// 🔙 BACK BUTTON LOGIC (MOBILE)
+if (backToListBtn) {
+  backToListBtn.addEventListener("click", () => {
+    // Removes the class to show the user list again
+    chatApp.classList.remove("show-chat");
+    selectedUser = null; // Clears the selection
+  });
+}

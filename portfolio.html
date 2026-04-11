@@ -19,13 +19,14 @@
   <span></span>
 </div>
 
-  <nav class="navbar">
+ <nav class="navbar">
     <a href="#home">Home</a>
     <a href="#projects">Projects</a>
     <a href="#about">About</a>
     <span id="userEmail"></span>
-    <button id="logoutBtn" class="btn">Logout</button>
-  </nav>
+    <a href="chat.html" class="btn" style="margin-left: 15px; padding: 8px 15px;">Live Chat</a>
+    <button id="logoutBtn" class="btn secondary">Logout</button>
+</nav>
 </header>
 
     <section class="home" id="home">
@@ -170,33 +171,7 @@
   });
 </script>
 
-<section class="chat-app">
 
-  <!-- LEFT SIDEBAR -->
-  <div class="chat-users" id="userList"></div>
-
-  <!-- RIGHT CHAT AREA -->
-  <div class="chat-window">
-
-  <!-- HEADER -->
-  <div class="chat-header">
-    <span id="chatHeader">Select a user</span>
-  </div>
-
-  <!-- MESSAGES -->
-  <div id="chatBox" class="chat-box"></div>
-
-  <!-- INPUT -->
-  <div class="chat-input">
-    <input type="text" id="messageInput" placeholder="Message..." />
-    <button id="sendBtn">➤</button>
-  </div>
-
-</div>
-
-</section>
-
-<script type="module" src="chat.js"></script>
 
 </body>
 </html>

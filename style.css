@@ -717,296 +717,312 @@ section {
     box-shadow: 0 0 60px rgba(0,255,238,0.9);
     transition: 0.4s;
 }
-.chat-section {
-    max-width: 600px;
-    margin: auto;
-    padding: 2rem;
-}
+/* =========================================
+   WhatsApp Desktop Chat UI
+   ========================================= */
 
-.chat-box {
-    height: 350px;
-    overflow-y: auto;
-    background: #111;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.message {
-    padding: 8px;
-    margin: 5px 0;
-    background: #222;
-    border-radius: 5px;
-}
-
-.chat-input {
-    display: flex;
-    gap: 10px;
-}
-
-.chat-input input {
-    flex: 1;
-    padding: 10px;
-}
-
-.chat-input button {
-    padding: 10px;
-}
 .chat-app {
     display: flex;
-    height: 500px;
-    max-width: 900px;
-    margin: auto;
-    border-radius: 10px;
+    width: 100%;
+    height: 100vh; /* Full screen view */
+    background: #111b21;
+    border-top: 1px solid #222d34;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
+    align-items: stretch;
 }
 
-/* LEFT USERS */
+/* LEFT SIDEBAR - USER LIST */
 .chat-users {
     width: 30%;
-    background: #111;
-    padding: 10px;
+    min-width: 250px;
+    max-width: 350px;
+    background: #111b21;
+    border-right: 1px solid #222d34;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .user {
-    padding: 10px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #222d34;
     cursor: pointer;
-    border-bottom: 1px solid #222;
-}
-
-.user:hover {
-    background: #222;
-}
-
-/* RIGHT CHAT */
-.chat-window {
-    width: 70%;
+    color: #e9edef;
+    font-size: 1.1rem;
     display: flex;
-    flex-direction: column;
-    background: #0a0a0a;
+    align-items: center;
+    justify-content: flex-start; /* Forces the email text to the left */
+    text-align: left;
+    transition: background 0.2s;
 }
 
-#chatHeader {
-    padding: 10px;
-    background: #111;
-    font-weight: bold;
+.user:hover, .user.active {
+    background: #2a3942;
 }
 
-.chat-box {
+/* RIGHT CHAT AREA */
+.chat-window {
     flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-}
-
-.message {
-    margin: 5px;
-    padding: 8px;
-    border-radius: 8px;
-    max-width: 70%;
-}
-
-/* SENT */
-.sent {
-    background: #00ffee;
-    color: black;
-    margin-left: auto;
-}
-
-/* RECEIVED */
-.received {
-    background: #333;
-}
-@media (max-width: 768px) {
-  .chat-app {
-    flex-direction: column;
-    height: 100vh;
-  }
-
-  .chat-users {
-    width: 100%;
-    height: 150px;
-  }
-
-  .chat-window {
-    width: 100%;
-  }
-}
-/* FULL SCREEN MOBILE */
-.chat-app {
-    display: flex;
-    height: 100vh;
-    max-width: 100%;
-}
-
-/* SIDEBAR */
-.chat-users {
-    width: 30%;
-    background: #111;
-    overflow-y: auto;
-}
-
-.user {
-    padding: 12px;
-    border-bottom: 1px solid #222;
-}
-
-/* CHAT WINDOW */
-.chat-window {
-    width: 70%;
     display: flex;
     flex-direction: column;
     background: #0b141a;
 }
 
-/* HEADER */
+/* CHAT HEADER */
 .chat-header {
     background: #202c33;
-    padding: 12px;
-    color: white;
-    font-weight: 600;
+    padding: 15px 20px;
+    color: #e9edef;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-bottom: 1px solid #222d34;
+    display: flex;
+    align-items: center;
 }
 
-/* CHAT AREA */
+/* CHAT BOX (MESSAGES) */
 .chat-box {
     flex: 1;
     overflow-y: auto;
-    padding: 10px;
-    background: url('https://i.imgur.com/8Km9tLL.png'); /* WhatsApp bg */
-    background-size: cover;
+    padding: 20px;
+    /* Authentic WhatsApp dark mode background pattern */
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); 
+    background-color: #0b141a;
+    background-blend-mode: multiply;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Spaces out the bubbles */
 }
 
 /* MESSAGE BUBBLES */
 .message {
-    max-width: 70%;
-    padding: 8px 12px;
-    margin: 6px;
-    border-radius: 10px;
-    font-size: 14px;
+    max-width: 65%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+    color: #e9edef;
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
 /* SENT (RIGHT) */
 .sent {
     background: #005c4b;
-    color: white;
-    margin-left: auto;
-    border-bottom-right-radius: 0;
+    align-self: flex-end; /* Pushes to the right */
+    border-top-right-radius: 0; /* WhatsApp style sharp corner */
 }
 
 /* RECEIVED (LEFT) */
 .received {
     background: #202c33;
-    color: white;
-    border-bottom-left-radius: 0;
+    align-self: flex-start; /* Pushes to the left */
+    border-top-left-radius: 0; /* WhatsApp style sharp corner */
 }
 
-/* INPUT BAR */
+/* INPUT AREA */
 .chat-input {
     display: flex;
-    padding: 10px;
+    padding: 15px 20px;
     background: #202c33;
+    gap: 15px;
+    align-items: center;
 }
 
 .chat-input input {
     flex: 1;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 14px 20px;
+    border-radius: 8px;
     border: none;
-    outline: none;
+    background: #2a3942;
+    color: #e9edef;
+    font-size: 1rem;
+}
+
+.chat-input input::placeholder {
+    color: #8696a0;
 }
 
 .chat-input button {
-    margin-left: 10px;
-    padding: 10px 15px;
-    border-radius: 50%;
     background: #00a884;
+    color: #111b21;
     border: none;
-    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
 }
 
-/* 📱 MOBILE MODE */
-@media (max-width: 768px) {
+.chat-input button:hover {
+    background: #06cf9c;
+}
 
+/* MESSAGE TICKS */
+.ticks {
+    font-size: 0.75rem;
+    margin-left: 8px;
+    color: #8696a0;
+    float: right;
+    margin-top: 6px;
+}
+
+.sent .ticks {
+    color: #53bdeb; /* WhatsApp blue ticks */
+}
+
+/* =========================================
+   Mobile Responsiveness Fix
+   ========================================= */
+/* =========================================
+   Mobile Responsiveness Fix (UPDATED)
+   ========================================= */
+@media (max-width: 768px) {
     .chat-app {
         flex-direction: column;
+        height: 100% !important; /* Let Flexbox handle the height, no more vh! */
     }
 
+    /* Fixed height for the user list so it never crushes the chat */
     .chat-users {
         width: 100%;
-        height: 120px;
-        display: flex;
-        overflow-x: auto;
+        max-width: 100%;
+        height: 220px !important; /* Locks the user list to a neat, scrollable box */
+        flex-shrink: 0; /* Prevents it from getting squished */
+        border-right: none;
+        border-bottom: 1px solid #222d34;
+        flex-direction: column; 
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .user {
-        min-width: 120px;
-        text-align: center;
+        padding: 12px 20px;
+        min-height: 55px;
     }
 
+    /* Let the chat window automatically fill whatever space is left */
+    /* Let the chat window automatically fill whatever space is left */
     .chat-window {
         width: 100%;
-        height: calc(100vh - 120px);
+        flex: 1 !important; 
+        min-height: 0; /* <--- ADD THIS: Forces the window to stay inside the screen */
+        height: auto !important; 
+    }
+    
+    .chat-box {
+        gap: 8px; 
     }
 }
-.ticks {
-  font-size: 12px;
-  margin-left: 5px;
-  color: gray;
+/* =========================================
+   HEADER & NAVBAR FIXES
+   ========================================= */
+
+/* 1. Make the header sleeker (thinner) */
+.header {
+    padding: 1rem 9% !important; /* Reduces the height of the navbar */
 }
 
-/* BLUE WHEN SEEN */
-.sent .ticks {
-  color: #53bdeb;
-}
-/* ================= CHAT FINAL FIX (DO NOT TOUCH OTHER CSS) ================= */
-
-/* FIX FULL SCREEN */
-.chat-app {
-    display: flex !important;
-    height: 100vh !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
+/* 2. Align all navbar items in a perfect horizontal row */
+.navbar {
+    display: flex;
+    align-items: center;
 }
 
-/* FIX LEFT SIDEBAR */
-.chat-users {
-    width: 280px !important;
-    min-width: 280px !important;
-    background: #111b21 !important;
-    border-right: 1px solid #2a3942 !important;
-    padding: 0 !important;
+/* 3. Fix the giant buttons (Overrides the 100% width from the login page) */
+.navbar .btn {
+    width: auto !important; /* Stops the button from stretching */
+    padding: 8px 18px !important; /* Makes the buttons smaller */
+    margin-top: 0 !important; 
+    margin-left: 15px !important; /* Space between email and buttons */
+    font-size: 0.9rem;
+    display: inline-block;
 }
 
-/* FIX USER ALIGNMENT */
-.user {
-    text-align: left !important;
-    padding: 15px !important;
-    border-bottom: 1px solid #222 !important;
+/* 4. Fix the Mobile Menu */
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem 5% !important;
+    }
+
+    .menu-icon {
+        display: flex !important; /* Ensures the hamburger icon is visible */
+        z-index: 1001;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(8, 8, 8, 0.95); /* Solid dark background so it's readable */
+        border-bottom: 2px solid var(--main-color);
+        flex-direction: column;
+        padding: 20px 0;
+        display: none !important; /* Hidden by default */
+    }
+
+    .navbar.active {
+        display: flex !important; /* Shows when hamburger is clicked */
+    }
+
+    /* Stack and center everything neatly inside the mobile menu */
+    .navbar a, .navbar span, .navbar .btn {
+        margin: 10px auto !important;
+        text-align: center;
+        display: block;
+    }
+}
+/* =========================================
+   MOBILE CHAT NAVIGATION (FULL SCREEN TOGGLE)
+   ========================================= */
+
+/* Default back button style (Hidden on Desktop) */
+.mobile-back-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #00ffee; /* Matches your theme color */
+    font-size: 1.2rem;
+    margin-right: 15px;
+    cursor: pointer;
 }
 
-/* FIX RIGHT CHAT AREA */
-.chat-window {
-    flex: 1 !important;
-    width: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
+@media (max-width: 768px) {
+    /* Show the back button on mobile */
+    .mobile-back-btn {
+        display: block;
+    }
 
-/* REMOVE CENTER BOX EFFECT */
-.chat-section {
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
+    /* Keep header items aligned horizontally */
+    .chat-header {
+        display: flex;
+        align-items: center;
+    }
 
-/* FIX CHAT BOX HEIGHT */
-.chat-box {
-    flex: 1 !important;
-    height: auto !important;
-}
+    /* DEFAULT STATE: Show Users full screen, Hide Chat */
+    .chat-users {
+        height: 100% !important; /* Take full height now */
+        display: flex !important;
+    }
+    .chat-window {
+        display: none !important; /* Hide chat window initially */
+    }
 
-/* FIX INPUT FULL WIDTH */
-.chat-input {
-    width: 100% !important;
+    /* ACTIVE STATE (When a user is clicked): Hide Users, Show Chat */
+    .chat-app.show-chat .chat-users {
+        display: none !important;
+    }
+    .chat-app.show-chat .chat-window {
+        display: flex !important;
+        height: 100% !important;
+    }
 }

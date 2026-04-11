@@ -25,9 +25,12 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+
 // logout
-logoutBtn.onclick = () => {
-  signOut(auth).then(() => {
-    window.location.href = "index.html";
-  });
-};
+if (logoutBtn) {
+  logoutBtn.onclick = () => {
+    signOut(auth).then(() => {
+      window.location.href = "index.html";
+    });
+  };
+}

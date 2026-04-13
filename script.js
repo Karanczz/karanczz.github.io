@@ -49,15 +49,41 @@ window.addEventListener("scroll", () => {
 });
 const menuIcon = document.getElementById("menu-icon");
 const navbar = document.querySelector(".navbar");
+const closeIcon = document.getElementById("close-icon");
 
+// 1. OPEN MENU & FREEZE BACKGROUND
 menuIcon.onclick = () => {
-  navbar.classList.toggle("active");
+  navbar.classList.add("active");
+  document.body.classList.add("no-scroll"); 
+  document.documentElement.classList.add("no-scroll"); // Locks the HTML tag
 };
+
+// 2. CLOSE MENU (X BUTTON) & UNFREEZE BACKGROUND
+if (closeIcon) {
+  closeIcon.onclick = () => {
+    navbar.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+    document.documentElement.classList.remove("no-scroll");
+  };
+}
+
+// 3. CLOSE MENU (CLICKING A LINK) & UNFREEZE BACKGROUND
 document.querySelectorAll(".navbar a").forEach(link => {
   link.onclick = () => {
     navbar.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+    document.documentElement.classList.remove("no-scroll");
   };
 });
+
+// 4. CLOSE MENU (CLICKING OUTSIDE) & UNFREEZE BACKGROUND
+navbar.onclick = (e) => {
+    if(e.target === navbar) {
+        navbar.classList.remove("active");
+        document.body.classList.remove("no-scroll");
+        document.documentElement.classList.remove("no-scroll");
+    }
+};
 const roles = ["Frontend Developer", "UI Designer", "Web Creator"];
 let i = 0;
 let j = 0;

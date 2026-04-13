@@ -20,10 +20,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
+body.animated-bg {
     background: linear-gradient(45deg, #080808, #111111, #002220, #080808);
     background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    animation: gradientBG 25s ease infinite;
     color: var(--text-color);
 }
 
@@ -127,6 +127,10 @@ section {
     background: transparent;
     color: var(--main-color);
     border: 2px solid var(--main-color);
+}
+/* Make every section a solid color EXCEPT the home section */
+section:not(#home) {
+    background: #111b21 !important; /* Your solid dark theme color */
 }
 
 /* About Section */
@@ -323,11 +327,7 @@ section {
 /* For Tablets and Smaller Screens (under 768px) */
 @media (max-width: 768px) {
     /* 1. Stack the header and navigation menu */
-    .header {
-        flex-direction: column;
-        padding: 1rem 5%;
-        background: var(--bg-color); /* Adds solid background so text is readable */
-    }
+    
 
     .navbar {
         margin-top: 1rem;
@@ -947,38 +947,109 @@ section {
     display: inline-block;
 }
 
-/* 4. Fix the Mobile Menu */
+
+/* 4. Fix the Mobile Menu - Side Drawer Style */
 @media (max-width: 768px) {
     .header {
-        padding: 1rem 5% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 1.5rem 5% !important;
+        flex-direction: row !important; /* Forces horizontal layout */
     }
 
+    .logo {
+        margin: 0 !important; 
+    }
     .menu-icon {
-        display: flex !important; /* Ensures the hamburger icon is visible */
+        display: flex !important;
         z-index: 1001;
     }
-
-    .navbar {
+    /* 3. The Close Icon (X) */
+    .close-icon {
         position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(8, 8, 8, 0.95); /* Solid dark background so it's readable */
-        border-bottom: 2px solid var(--main-color);
+        top: 25px;
+        right: 25px;
+        font-size: 3rem;
+        color: #00ffee; 
+        cursor: pointer;
+        display: block !important;
+        z-index: 1010; 
+    }
+
+    /* 4. Freeze the background (THE NUCLEAR OPTION) */
+    html.no-scroll, body.no-scroll {
+        overflow: hidden !important;
+        height: 100vh !important;
+        overscroll-behavior: none; /* Stops the "bounce" scroll effect */
+    }
+
+    /* THE SLIDE-IN DRAWER */
+    .navbar {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hides the menu completely off-screen to the right */
+        width: 75%; /* Takes up 3/4 of the screen like the screenshot */
+        height: 100vh;
+        background: #111b21; /* Matches your dark theme */
         flex-direction: column;
-        padding: 20px 0;
-        display: none !important; /* Hidden by default */
+        padding: 70px 30px 30px 30px; /* Space for close button */
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        transition: 0.4s ease-in-out; /* Smooth sliding animation */
+        display: flex !important; 
+        justify-content: flex-start;
+        align-items: flex-start;
+        z-index: 1005;
+        border-bottom: none;
     }
 
+    /* Slides in when the hamburger is clicked */
     .navbar.active {
-        display: flex !important; /* Shows when hamburger is clicked */
+        right: 0;
     }
 
-    /* Stack and center everything neatly inside the mobile menu */
-    .navbar a, .navbar span, .navbar .btn {
-        margin: 10px auto !important;
-        text-align: center;
+    /* LEFT-ALIGNED TEXT */
+    /* LEFT-ALIGNED TEXT & REMOVE UNDERLINES */
+    .navbar a, .navbar span {
+        margin: 15px 0 !important;
+        font-size: 1.2rem;
+        text-align: left !important; 
         display: block;
+        width: 100%;
+        color: #e9edef;
+        text-decoration: none !important; /* Kills standard underlines */
+        border-bottom: none !important;   /* Kills border underlines */
+    }
+
+    /* Kills any animated line effects from your desktop CSS */
+    .navbar a::after, .navbar a::before {
+        display: none !important; 
+    }
+    
+    /* BUTTONS AT THE BOTTOM (Side-by-Side) */
+    .nav-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 15px; /* Space between the two buttons */
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    .navbar .btn {
+        margin: 0 !important;
+        width: auto !important;
+        padding: 10px 20px !important;
+    }
+
+    /* CLOSE ICON (X) */
+    .close-icon {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        font-size: 2rem;
+        color: #e9edef;
+        cursor: pointer;
+        display: block; /* Shows only on mobile */
     }
 }
 /* =========================================
@@ -1024,5 +1095,239 @@ section {
     .chat-app.show-chat .chat-window {
         display: flex !important;
         height: 100% !important;
+    }
+}
+/* =========================================
+   BULLETPROOF MOBILE SIZING & DVH FIX
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Force the chat app to strictly obey the dynamic height */
+    .chat-app {
+        height: 100% !important;
+        max-height: 100% !important;
+        flex: 1;
+    }
+
+    /* 2. Protect the input bar from getting pushed out */
+    .chat-input {
+        flex-shrink: 0 !important;
+        min-height: 60px; /* Guarantees it never squishes */
+        /* env() protects the input from sitting under the iPhone swipe bar */
+        padding-bottom: max(15px, env(safe-area-inset-bottom)); 
+        background: #202c33; /* Ensures background covers bottom edge */
+    }
+
+    /* 3. Make sure the chat area shrinks correctly */
+    .chat-window {
+        height: 100% !important;
+        min-height: 0; 
+    }
+
+    /* 4. Fix the "Back to Portfolio" text wrapping on narrow screens */
+    header a {
+        font-size: 0.95rem !important;
+        white-space: nowrap; /* Prevents text from breaking into two lines */
+    }
+    
+    header {
+        padding: 12px 15px !important; /* Slightly tighter padding for small screens */
+    }
+}
+/* =========================================
+   FIX FOR SEND BUTTON CUT-OFF
+   ========================================= */
+
+.chat-input {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    overflow: hidden; /* Prevents anything from spilling out */
+}
+
+.chat-input input {
+    flex: 1;
+    min-width: 0 !important; /* <--- THE MAGIC FIX: Allows the input to shrink on small phones */
+}
+
+.chat-input button {
+    flex-shrink: 0 !important; /* <--- Prevents the button from being squished or pushed out */
+}
+.close-icon {
+    display: none;
+}
+.nav-buttons {
+    display: flex;
+    align-items: center;
+}
+/* =========================================
+   FORCE FOOTER TO STAY STILL
+   ========================================= */
+.footer, #contact {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important; /* Stops it from sliding up */
+    opacity: 1 !important;      /* Forces it to stay fully visible */
+}
+footer {
+  background: #0b0f14; /* solid color */
+}
+.subtitle {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+/* =========================================
+   Google Photos Style Gallery
+   ========================================= */
+
+/* Override the default flex centering for this specific section */
+.gallery-section {
+    display: block; 
+    padding: 3rem 5%;
+    min-height: 100vh;
+}
+
+/* The Grid Container */
+.gallery-grid {
+    display: grid;
+    /* Automatically fit as many 250px columns as possible */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 200px; /* Base height for standard photos */
+    grid-gap: 15px; /* Spacing between photos */
+    grid-auto-flow: dense; /* Fills in empty gaps automatically */
+}
+
+/* Individual Image Containers */
+.gallery-item {
+    overflow: hidden;
+    border-radius: 8px; /* Slightly rounded corners */
+    background: #202c33; 
+    position: relative;
+    cursor: pointer;
+}
+
+/* Dynamic Sizing: Makes some images larger to mimic Google Photos */
+.gallery-item:nth-child(2n) {
+    grid-row: span 2; /* Tall images */
+}
+.gallery-item:nth-child(5n) {
+    grid-column: span 2; /* Wide images */
+}
+
+/* The Images Themselves */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents stretching */
+    transition: transform 0.4s ease;
+}
+
+/* Premium Zoom Effect on Hover */
+.gallery-item:hover img {
+    transform: scale(1.08); 
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Smaller columns on phone */
+        grid-auto-rows: 130px;
+        grid-gap: 8px;
+    }
+    
+    /* Turn off the "wide" images on phones so they don't break the screen */
+    .gallery-item:nth-child(5n) {
+        grid-column: span 1; 
+    }
+}
+/* =========================================
+   Lightbox (Full Screen Image Viewer)
+   ========================================= */
+
+/* The hidden background overlay */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000; /* Stays on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(8, 8, 8, 0.95); /* Very dark, slight transparency */
+    align-items: center;
+    justify-content: center;
+}
+
+/* The actual image */
+.lightbox-content {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 255, 238, 0.2); /* Subtle neon glow */
+    animation: zoomIn 0.3s ease; /* Smooth pop-in effect */
+}
+
+/* Close Button (X) */
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #e9edef;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 2001;
+}
+
+.close-lightbox:hover {
+    color: var(--main-color);
+}
+
+/* Next & Previous Arrows */
+.prev-lightbox, .next-lightbox {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.3s ease;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+/* Position the arrows */
+.prev-lightbox { left: 20px; }
+.next-lightbox { right: 20px; }
+
+/* Arrow hover effect */
+.prev-lightbox:hover, .next-lightbox:hover {
+    background-color: var(--main-color);
+    color: black;
+}
+
+/* Animation for the image popping in */
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Mobile Adjustments for Lightbox */
+@media (max-width: 768px) {
+    .prev-lightbox, .next-lightbox {
+        font-size: 20px;
+        padding: 10px;
+    }
+    .close-lightbox {
+        top: 15px;
+        right: 20px;
+        font-size: 35px;
     }
 }

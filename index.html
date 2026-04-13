@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,22 +7,53 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="animated-bg">
 
 <div class="auth-container">
-  <div class="auth-box">
-
+  
+  <div class="auth-box" id="loginBox">
     <h2>Welcome <span>Back</span></h2>
+    <p class="subtitle">Login to continue</p>
 
-    <input type="email" id="email" placeholder="Enter your email">
-    <input type="password" id="password" placeholder="Enter your password">
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="loginEmail" placeholder="Enter your email">
+    </div>
 
-    <button id="loginBtn" class="btn">Login</button>
-    <button id="signupBtn" class="btn secondary">Sign Up</button>
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter your password">
+    </div>
 
-    <p id="statusMessage" class="message"></p>
-
+    <button id="loginBtn" class="btn primary">Login</button>
+    <p class="message" style="margin-top: 20px;">Don't have an account? <a href="#" id="showSignup" style="color: var(--main-color);">Sign up</a></p>
+    <p id="loginStatusMessage" class="message"></p>
   </div>
+
+  <div class="auth-box" id="signupBox" style="display: none;">
+    <h2>Create <span>Account</span></h2>
+    <p class="subtitle">Sign up to get started</p>
+
+    <div class="input-group">
+      <label>Full Name</label>
+      <input type="text" id="signupName" placeholder="Enter your full name">
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="signupEmail" placeholder="Enter your email">
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="signupPassword" placeholder="Enter your password">
+    </div>
+
+    <button id="signupBtn" class="btn secondary">Create Account</button>
+    <p class="message" style="margin-top: 20px;">Already have an account? <a href="#" id="showLogin" style="color: var(--main-color);">Login</a></p>
+    <p id="signupStatusMessage" class="message"></p>
+  </div>
+
 </div>
 
 <script type="module" src="auth.js"></script>

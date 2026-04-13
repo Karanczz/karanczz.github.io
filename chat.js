@@ -16,6 +16,7 @@ import {
 let unsubscribeMessages = null;
 const chatApp = document.querySelector(".chat-app");
 const backToListBtn = document.getElementById("backToListBtn");
+const searchUserInput = document.getElementById("searchUserInput"); // <-- ADD THIS LINE
 
 // Firebase config
 const firebaseConfig = {
@@ -94,21 +95,32 @@ function getChatId(user1, user2) {
 }
 
 // ⌨️ TYPING DETECTION
+// ⌨️ TYPING DETECTION (OPTIMIZED)
+let isTyping = false; // Keeps track if we already told Firebase we are typing
+
+
 input.addEventListener("input", async () => {
   if (!selectedUser || !currentUser) return;
 
   const chatId = getChatId(currentUser.email, selectedUser);
 
-  await setDoc(doc(db, "chats", chatId, "typing", currentUser.email), {
-    typing: true
-  });
+  // 1. Only send the "typing: true" signal ONCE when they first start typing
+  if (!isTyping) {
+    isTyping = true;
+    await setDoc(doc(db, "chats", chatId, "typing", currentUser.email), {
+      typing: true
+    }, { merge: true }); // Use merge so we don't accidentally overwrite other data
+  }
 
+  // 2. Reset the countdown timer every single time they hit a new key
   clearTimeout(typingTimeout);
 
+  // 3. If they stop typing for 1.5 seconds, finally tell Firebase they stopped
   typingTimeout = setTimeout(async () => {
+    isTyping = false;
     await setDoc(doc(db, "chats", chatId, "typing", currentUser.email), {
       typing: false
-    });
+    }, { merge: true });
   }, 1500);
 });
 
@@ -135,6 +147,13 @@ function listenTyping() {
     }
   });
 }
+// 🔥 PRESS ENTER TO SEND MESSAGE
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault(); 
+    sendBtn.click(); 
+  }
+});
 
 // 💬 SEND MESSAGE
 sendBtn.addEventListener("click", async () => {
@@ -231,5 +250,26 @@ if (backToListBtn) {
     // Removes the class to show the user list again
     chatApp.classList.remove("show-chat");
     selectedUser = null; // Clears the selection
+  });
+}
+// 🔍 SEARCH USERS LOGIC
+if (searchUserInput) {
+  searchUserInput.addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    
+    // Grab all the user elements currently in the list
+    const allUsers = document.querySelectorAll("#userList .user");
+
+    allUsers.forEach(userDiv => {
+      // Get the text inside the user div (e.g., "karan1@gmail.com 🟢")
+      const userText = userDiv.innerText.toLowerCase();
+      
+      // If the text includes the search term, show it. Otherwise, hide it.
+      if (userText.includes(searchTerm)) {
+        userDiv.style.display = "flex";
+      } else {
+        userDiv.style.display = "none";
+      }
+    });
   });
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
      <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
-<body>
+<body class="animated-bg">
 
     <header class="header">
   <a href="#" class="logo">Karan's Portfolio</a>
@@ -20,12 +20,17 @@
 </div>
 
  <nav class="navbar">
+    <div class="close-icon" id="close-icon"><i class="fas fa-times"></i></div>
+    
     <a href="#home">Home</a>
     <a href="#projects">Projects</a>
     <a href="#about">About</a>
     <span id="userEmail"></span>
-    <a href="chat.html" class="btn" style="margin-left: 15px; padding: 8px 15px;">Live Chat</a>
-    <button id="logoutBtn" class="btn secondary">Logout</button>
+    
+    <div class="nav-buttons">
+        <a href="chat.html" class="btn">Live Chat</a>
+        <button id="logoutBtn" class="btn secondary">Logout</button>
+    </div>
 </nav>
 </header>
 
@@ -84,7 +89,7 @@
             <div class="card-container">
                 
                 <div class="card">
-                    <img src="project1.jpg" alt="AI Assistant" class="project-img">
+                    <img src="image1.webp" alt="AI Assistant" class="project-img">
                     <h3>Virtual AI Assistant</h3>
                     <div class="tech-stack">
                         <span>Python</span>
@@ -95,7 +100,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="project2.jpg" alt="Compiler" class="project-img">
+                    <img src="image2.webp" alt="Compiler" class="project-img">
                     <h3>Custom Programming Language</h3>
                     <div class="tech-stack">
                         <span>C++</span>
@@ -106,21 +111,21 @@
                 </div>
 
                 <div class="card">
-                    <img src="project3.png" alt="Photography" class="project-img">
+                    <img src="image3.webp" alt="Photography" class="project-img">
                     <h3>Photography & Edits</h3>
                     <div class="tech-stack">
                         <span>Photoshop</span>
                         <span>Lightroom</span>
                     </div>
                     <p>A visual gallery showcasing my personal photography, cinematic color grading, and digital image editing experiments.</p>
-                    <a href="#" class="btn" target="_blank">View Gallery</a>
+                    <a href="gallery.html" class="btn" target="_blank">View Gallery</a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section class="about" id="about" data-aos="fade-up">
+    <section class="about" id="about">
         <div class="about-content">
             <h2>About <span>Me</span></h2>
             <p>I am a passionate developer with a knack for building modern, responsive web applications. I enjoy turning complex problems into simple, beautiful, and intuitive interface designs.</p>
@@ -146,7 +151,7 @@
     <script src="script.js"></script>
     <script type="module" src="guard.js"></script>
 
-   <script>
+  <script>
   window.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector(".header");
     const home = document.querySelector("#home");

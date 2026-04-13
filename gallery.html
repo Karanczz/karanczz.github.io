@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karan Photography - Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="animated-bg">
+
+    <header class="header" style="position: relative; padding: 1.5rem 5%; background: rgba(8, 8, 8, 0.8);">
+        <a href="portfolio.html" style="color: var(--main-color); font-size: 1.1rem; text-decoration: none; font-weight: 600;">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <div class="logo" style="margin: 0 auto; color: #fff;">Karan Photography</div>
+    </header>
+
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="Gallery/pedit1.webp" alt="Edit 1"></div>
+            <div class="gallery-item"><img src="Gallery/pedit2.webp" alt="Edit 2"></div>
+            <div class="gallery-item"><img src="Gallery/pedit3.webp" alt="Edit 3"></div>
+            <div class="gallery-item"><img src="Gallery/pedit4.webp" alt="Edit 4"></div>
+            <div class="gallery-item"><img src="Gallery/pedit5.webp" alt="Edit 5"></div>
+            <div class="gallery-item"><img src="Gallery/pedit6.webp" alt="Edit 6"></div>
+            <div class="gallery-item"><img src="Gallery/pedit7.webp" alt="Edit 7"></div>
+            <div class="gallery-item"><img src="Gallery/pedit8.webp" alt="Edit 8"></div>
+        </div>
+    </section>
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <a class="prev-lightbox">&#10094;</a>
+        <img class="lightbox-content" id="lightbox-img">
+        <a class="next-lightbox">&#10095;</a>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.close-lightbox');
+        const prevBtn = document.querySelector('.prev-lightbox');
+        const nextBtn = document.querySelector('.next-lightbox');
+        const images = document.querySelectorAll('.gallery-item img');
+
+        let currentIndex = 0;
+
+        // 1. Open Lightbox when an image is clicked
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                currentIndex = index;
+            });
+        });
+
+        // 2. Close Lightbox (Clicking the X)
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        // 3. Close Lightbox (Clicking the dark background)
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        // 4. Update image function
+        function showImage(index) {
+            if (index >= images.length) { currentIndex = 0; } // Loop back to start
+            if (index < 0) { currentIndex = images.length - 1; } // Loop to end
+            lightboxImg.src = images[currentIndex].src;
+        }
+
+        // 5. Next and Previous Button Clicks
+        prevBtn.addEventListener('click', () => {
+            currentIndex--;
+            showImage(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex++;
+            showImage(currentIndex);
+        });
+
+        // Optional: Let users use keyboard arrows to navigate
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') { currentIndex--; showImage(currentIndex); }
+                if (e.key === 'ArrowRight') { currentIndex++; showImage(currentIndex); }
+                if (e.key === 'Escape') { lightbox.style.display = 'none'; }
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -21,7 +21,16 @@ onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.href = "index.html";
   } else {
-    userEmail.innerText = "👋 " + user.email;
+    // Check if the user has a display name set
+    if (user.displayName) {
+      // Split the full name by space and grab the first word
+      const firstName = user.displayName.split(' ')[0];
+      userEmail.innerText = "👋 " + firstName;
+    } else {
+      // Fallback for older users who signed up before we added the Name field
+      const prefix = user.email.split('@')[0];
+      userEmail.innerText = "👋 " + prefix;
+    }
   }
 });
 

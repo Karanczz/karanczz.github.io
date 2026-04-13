@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="margin: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; background: #111b21;">
+<body style="margin: 0; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; background: #111b21;">
 
     <header style="background: #202c33; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222d34; flex-shrink: 0;">
         <a href="portfolio.html" style="color: #00ffee; font-size: 1.1rem; text-decoration: none; font-weight: 600;">
@@ -20,7 +20,15 @@
 
 
   <!-- LEFT SIDEBAR -->
-  <div class="chat-users" id="userList"></div>
+  <div class="chat-users">
+      
+      <div class="search-container" style="padding: 12px; border-bottom: 1px solid #222d34; flex-shrink: 0; background: #111b21; position: sticky; top: 0; z-index: 10;">
+          <input type="text" id="searchUserInput" placeholder="Search users..." style="width: 100%; padding: 10px 15px; border-radius: 8px; border: none; background: #202c33; color: #e9edef; font-size: 0.95rem; outline: none;">
+      </div>
+
+      <div id="userList" style="display: flex; flex-direction: column;"></div>
+
+  </div>
 
   <!-- RIGHT CHAT AREA -->
   <div class="chat-window">
@@ -45,7 +53,7 @@
 </section>
 
 
-    <script type="module" src="guard.js"></script>
+    
     <script type="module" src="chat.js"></script>
 </body>
 </html>
